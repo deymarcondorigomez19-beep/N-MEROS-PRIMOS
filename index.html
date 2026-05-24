@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números Primos en Códigos de Acceso</title>
+    <link rel="stylesheet" href="estilos/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ============================
+         ENCABEZADO
+    ============================= -->
+    <header class="encabezado">
+        <div class="shield-deco" aria-hidden="true">
+            <span>🔐</span><span>🛡️</span><span>🔑</span><span>🛡️</span><span>🔐</span>
+        </div>
+        <h1>Números Primos en Códigos de Acceso</h1>
+        <p class="subtitulo">Matemáticas que resuelven problemas del mundo real</p>
+        <p class="autor">Desafío Web — Programación Web</p>
+    </header>
+
+    <main class="contenedor">
+
+        <!-- ============================
+             CONTEXTO DEL PROBLEMA
+        ============================= -->
+        <section class="seccion tarjeta" id="contexto">
+            <h2>🔒 Contexto del Problema</h2>
+            <p>
+                En el mundo de la seguridad informática, la elección de un código de acceso
+                es crítica. Los <strong>números primos</strong> son la base de los sistemas
+                de cifrado más utilizados en el mundo, como <strong>RSA</strong>, porque son
+                extremadamente difíciles de factorizar.
+            </p>
+            <p>
+                Un código numérico primo es más seguro porque no puede descomponerse en
+                factores menores (excepto 1 y él mismo), lo que dificulta los ataques
+                de fuerza bruta y los intentos de adivinación sistemática.
+            </p>
+
+            <div class="tabla-primos">
+                <h3>Ejemplos de códigos y su seguridad</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>¿Es primo?</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🔑 1234</td>
+                            <td>No (divisible entre 2)</td>
+                            <td><span class="badge badge-no">⚠ No válido</span></td>
+                        </tr>
+                        <tr>
+                            <td>🔑 1237</td>
+                            <td>Sí (solo divisible por 1 y 1237)</td>
+                            <td><span class="badge badge-si">✔ Válido</span></td>
+                        </tr>
+                        <tr>
+                            <td>🔑 9999</td>
+                            <td>No (divisible entre 3)</td>
+                            <td><span class="badge badge-no">⚠ No válido</span></td>
+                        </tr>
+                        <tr>
+                            <td>🔑 9973</td>
+                            <td>Sí (número primo)</td>
+                            <td><span class="badge badge-si">✔ Válido</span></td>
+                        </tr>
+                        <tr>
+                            <td>🔑 7919</td>
+                            <td>Sí (el primo #1000)</td>
+                            <td><span class="badge badge-si">✔ Válido</span></td>
+                        </tr>
+                        <tr>
+                            <td>🔑 1000</td>
+                            <td>No (divisible entre 2, 5, 8...)</td>
+                            <td><span class="badge badge-no">⚠ No válido</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============================
+             EXPLICACIÓN DEL ALGORITMO
+        ============================= -->
+        <section class="seccion tarjeta" id="algoritmo">
+            <h2>🧮 Explicación del Algoritmo</h2>
+            <p>
+                Un <strong>número primo</strong> es aquel que solo puede dividirse
+                exactamente entre <strong>1 y sí mismo</strong>. Para verificarlo,
+                contamos cuántos divisores tiene:
+            </p>
+
+            <div class="secuencia-visual">
+                <span class="paso-alg">Ingresa el código</span>
+                <span class="op">→</span>
+                <span class="paso-alg">Contar divisores</span>
+                <span class="op">→</span>
+                <span class="paso-alg">¿Exactamente 2?</span>
+                <span class="op">→</span>
+                <span class="paso-alg">¡Es primo!</span>
+            </div>
+
+            <p>
+                El algoritmo recorre todos los números desde <code>1</code> hasta
+                el propio código usando un <strong>ciclo for</strong>. Por cada número
+                que divide exactamente al código (sin residuo), incrementa un contador.
+                Al final, si el contador es exactamente <strong>2</strong>, el código
+                es primo y se considera seguro.
+            </p>
+            <p>
+                Este método usa <strong>una sola variable contadora</strong> y el
+                operador módulo <code>%</code> para verificar divisibilidad, sin
+                necesidad de arrays ni funciones matemáticas complejas.
+            </p>
+        </section>
+
+        <!-- ============================
+             FORMULARIO / SIMULADOR
+        ============================= -->
+        <section class="seccion tarjeta" id="simulador">
+            <h2>🛡️ Validador de Código de Acceso</h2>
+            <p class="desc-form">
+                Ingresa tu código numérico y el sistema verificará si es un número
+                primo, clasificándolo como seguro o no seguro.
+            </p>
+
+            <form id="form-primos" onsubmit="return false;" novalidate>
+                <div class="grupo-input">
+                    <label for="codigo">Código numérico de acceso:</label>
+                    <input
+                        type="number"
+                        id="codigo"
+                        min="2"
+                        max="999999"
+                        value="1237"
+                        placeholder="ej. 1237"
+                        required
+                    >
+                    <small>Mínimo: 2 · Máximo: 999 999</small>
+                </div>
+                <button type="button" onclick="validarCodigo()">
+                    🔍 Validar Código
+                </button>
+            </form>
+
+            <!-- RESULTADO -->
+            <div id="resultado" class="resultado-box" aria-live="polite">
+                <span class="placeholder-texto">El resultado aparecerá aquí 🔐</span>
+            </div>
+        </section>
+
+        <!-- ============================
+             CÓDIGO EXPLICADO
+        ============================= -->
+        <section class="seccion tarjeta" id="codigo">
+            <h2>💻 ¿Cómo funciona el código JavaScript?</h2>
+            <p>
+                El siguiente código es la función principal del validador.
+                Cada línea está comentada para explicar exactamente qué hace:
+            </p>
+
+            <div class="bloque-codigo">
+<pre><code><span class="com">// Función auxiliar: devuelve un ícono según el tamaño del código</span>
+function obtenerIcono(numero) {
+    if (numero &lt;= 10)   return "🔑";
+    if (numero &lt;= 100)  return "🔓";
+    if (numero &lt;= 1000) return "🛡️";
+    if (numero &lt;= 9999) return "🔒";
+    return "🏰";
+}
+
+<span class="com">// Función principal que se ejecuta al presionar el botón</span>
+function validarCodigo() {
+
+    <span class="com">// 1. Capturamos el valor del input usando getElementById</span>
+    var numero = parseInt(document.getElementById('codigo').value);
+    var divResultado = document.getElementById('resultado');
+
+    <span class="com">// 2. Validamos que el valor sea un número en rango válido</span>
+    if (isNaN(numero) || numero &lt; 2 || numero &gt; 999999) {
+        divResultado.innerHTML =
+            "&lt;span class='error-msg'&gt;⚠ Ingresa un número entre 2 y 999 999.&lt;/span&gt;";
+        return;
+    }
+
+    <span class="com">// 3. Iniciamos el contador de divisores en cero</span>
+    var contador = 0;
+
+    <span class="com">// 4. Ciclo for: revisamos todos los números del 1 al propio código</span>
+    for (var i = 1; i &lt;= numero; i++) {
+
+        <span class="com">// Si el residuo de la división es 0, encontramos un divisor</span>
+        if (numero % i == 0) {
+            contador = contador + 1;
+        }
+    }
+
+    <span class="com">// 5. Si tiene exactamente 2 divisores, es primo</span>
+    var esPrimo = (contador == 2);
+
+    <span class="com">// 6. Renderizamos el resultado con estilo en la página</span>
+    if (esPrimo) {
+        divResultado.innerHTML =
+            "&lt;div class='res-valido'&gt;" +
+            "  &lt;div class='res-icono'&gt;" + obtenerIcono(numero) + "&lt;/div&gt;" +
+            "  &lt;div class='res-titulo'&gt;✔ Código Válido&lt;/div&gt;" +
+            "  &lt;div class='res-numero'&gt;" + numero + "&lt;/div&gt;" +
+            "  &lt;div class='res-detalle'&gt;Es un número primo — Código SEGURO&lt;/div&gt;" +
+            "  &lt;div class='res-extra'&gt;Divisores: solo 1 y " + numero + "&lt;/div&gt;" +
+            "&lt;/div&gt;";
+    } else {
+        divResultado.innerHTML =
+            "&lt;div class='res-invalido'&gt;" +
+            "  &lt;div class='res-icono'&gt;⚠&lt;/div&gt;" +
+            "  &lt;div class='res-titulo'&gt;✘ Código No Válido&lt;/div&gt;" +
+            "  &lt;div class='res-numero'&gt;" + numero + "&lt;/div&gt;" +
+            "  &lt;div class='res-detalle'&gt;No es primo — Código NO SEGURO&lt;/div&gt;" +
+            "  &lt;div class='res-extra'&gt;Tiene " + contador + " divisores&lt;/div&gt;" +
+            "&lt;/div&gt;";
+    }
+}</code></pre>
+            </div>
+
+            <div class="pasos-resumen">
+                <div class="paso"><span class="paso-num">1</span><p><strong>Captura:</strong> Lee el código ingresado con <code>getElementById</code>.</p></div>
+                <div class="paso"><span class="paso-num">2</span><p><strong>Validación:</strong> Verifica que el número esté entre 2 y 999 999.</p></div>
+                <div class="paso"><span class="paso-num">3</span><p><strong>Contador:</strong> Inicia en <code>0</code> para contar divisores.</p></div>
+                <div class="paso"><span class="paso-num">4</span><p><strong>Ciclo for:</strong> Recorre todos los números con <code>numero % i == 0</code>.</p></div>
+                <div class="paso"><span class="paso-num">5</span><p><strong>Decisión:</strong> Si el contador es exactamente <code>2</code>, el código es primo.</p></div>
+                <div class="paso"><span class="paso-num">6</span><p><strong>Resultado:</strong> Muestra en pantalla si el código es seguro o no.</p></div>
+            </div>
+        </section>
+
+        <!-- ============================
+             CONCLUSIÓN
+        ============================= -->
+        <section class="seccion tarjeta" id="conclusion">
+            <h2>🏁 Conclusión</h2>
+            <p>
+                Los números primos no son solo un concepto matemático abstracto: son el
+                <strong>fundamento de la seguridad digital moderna</strong>. Algoritmos
+                como RSA protegen millones de transacciones bancarias y comunicaciones
+                diarias gracias a la dificultad de factorizar números primos grandes.
+            </p>
+            <p>
+                Al programar este validador, comprobamos que con <strong>un ciclo, un
+                contador y el operador módulo</strong> podemos construir una herramienta
+                útil que aplica matemática real a un problema de seguridad informática,
+                convirtiendo un concepto abstracto en algo funcional y concreto.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="pie">
+        <p>Desafío Web — Números Primos en Códigos de Acceso 🔐 · Programación Web</p>
+    </footer>
+
+    <script src="script/script.js"></script>
+</body>
+</html>
